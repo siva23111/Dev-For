@@ -1,0 +1,49 @@
+{% include 'home.html' %}
+{% load static %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-3 text-center">
+              <img src="{{ user.profile.img.url }}" alt="profile image" class="img-fluid rounded-circle" style="width: 150px;">
+            </div>
+            <div class="col-md-9">
+              <h2 class="text-capitalize">{{ user.profile.user }}</h2>
+              <p class="text-muted">{{ user.profile.name }}</p>
+              <hr>
+              <a href="{% url 'app1:profupd' %}" class="btn btn-primary">Edit Profile</a>
+            </div>
+          </div>
+          <div class="row">
+ 
+            <div class="col-md-4">
+              <div class="card mb-3">
+                <div class="card-body text-center">
+                  <h3 class="card-title">{{ asked }}</h3>
+                  <p class="card-text text-muted">Questions Asked</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-3">
+                <div class="card-body text-center">
+                  <h3 class="card-title">{{ answer }}</h3>
+                  <p class="card-text text-muted">Replied Questions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h3>About</h3>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <p class="card-text font-italic">{{ user.profile.des }}</p>
+                  <p class="card-text font-italic">Lives in {{ user.profile.loc }}</p>
+                  <p class="card-text font-italic">Date Of Birth : {{ user.profile.dob }}</p>
+                </div>
+              </div>
+            </div>
+        </div>

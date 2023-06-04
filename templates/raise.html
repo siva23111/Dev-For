@@ -1,0 +1,27 @@
+{% include 'home.html' %}
+
+
+<form method="POST">
+    {% csrf_token %}
+       <section class="py-4 my-5">
+        <div class="container" >
+            <div class="row" >
+                <div class="col-md-4 offset-md-4" >
+                    <h1 class="h3 mb-3 font-weight-normal">Raise | Page</h1><br>
+                    <div class="mb-1" >
+                        <label for="" class="form-label" >Title</label>
+                        {{ tbf.title }}
+                    </div> 
+                    <div class="mb-1" >
+                        <label for="" class="form-label" >Description</label>
+                        {{ tbf.description }}
+                    </div>
+                    <div class="mb-2" >
+                    <button type="submit" class="btn btn-primary" >Raise</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</form>

@@ -1,0 +1,35 @@
+{% extends 'enc/bs.html' %}
+
+{% block title %}
+        Developers | Forum
+{% endblock title %}
+    {% block content %}
+<div class="container">
+    {% if table %}
+        {% for i in table %}
+            <div class="bg-white rounded p-3 mb-3">
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'app1:tabv' desc=i.pk %}" class="text-decoration-none text-dark">
+                        <div class="text-center">
+                            <h4 class="mb-0 ">{{ i.title }}
+                                {% if i.status %}
+                                [CLOSED]
+                                {% else %}
+                                [OPEN]
+                                {% endif %}
+                            </h4>
+                        </div>
+                    </a>
+                    <div class="small" style="font-size: 15px;" >Created by:{{ i.username }}</div> 
+                </div>
+                <hr class="my-2">
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="bg-white rounded p-3 mb-3">
+            <h4 class="mb-0">{{ a }}</h4>
+        </div>
+    {% endif %}
+</div>
+        {% csrf_token %}
+    {% endblock content %}

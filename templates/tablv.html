@@ -1,0 +1,112 @@
+{% extends 'enc/bs.html' %}
+{% block title %}
+        Stack | Overflow
+{% endblock title %}
+    {% block content %}
+  <section>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-14">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6 class="card-subtitle mb-1 text-muted">Status:</h6>
+                        {% if tabv.status %}
+                          <div class="alert alert-success" role="alert">Closed</div>
+                        {% else %}
+                          <div class="alert alert-danger" role="alert">Open</div>
+                          {% if request.user.is_authenticated and request.user.username == tabv.username %}
+
+                          <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="status" value="True">
+                            <button type="submit" class="btn btn-danger ">Close</button>
+                          </form>
+                          {% else %}
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-10">
+                    <label for="" class="card-text" > <b>User: </b> {{ tabv.username }} </label>
+                    <hr>
+                    <h4 class="card-title">{{ tabv.title }}:</h4>
+                    <p class="card-text">{{ tabv.description }}</p>
+                    
+                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                      <div class="d-flex flex-start w-100">
+                        {% if request.user.is_authenticated %}
+
+                        {% if tabv.status %}
+                        {%  else %}
+                        <form method="POST">
+                          {% csrf_token %}
+                          <div class="mb-1" style="width: 500px">
+                            {{ rf.as_p }}
+                            <div class="float-end mt-2">
+                            <button type="submit" class="btn btn-danger btn-sm " > Post </button>
+                            </div>
+                        </div>
+                        </form>
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>     
+<div class="container my-5 py-5">
+  <div class="row">
+    <div class="col-md-12 col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Recent comments</h4>
+          <p class="card-text">Latest comments section by users</p>
+          <div class="media mb-3">
+            <div class="media-body">
+                {% csrf_token %}
+              {% for user in user %}
+              <h5 class="mt-0">{{user.user}}</h5> 
+              
+              <p style="font-weight: 400;" >
+                {% if request.user.is_authenticated and request.user.username == tabv.username %}
+                <form action="{% url 'app1:likepost' pk=user.table.pk %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" name="post_id" value="{{ user.id }}" class="btn btn-primary btn-sm">Correct</button>
+                </form>
+                {% else %}
+                {% endif %}
+
+
+            {% if user.likes.exists %}
+            <ul class="list-group">
+              {% for liked_user in user.likes.all %}
+                Checked By:  {{ liked_user.username }}
+              {% endfor %}
+            </ul>
+          {% else %}
+
+          {% endif %}
+            </p>
+              {{user.message}}
+            </p>
+            <hr>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

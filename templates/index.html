@@ -1,0 +1,20 @@
+{% include 'home.html' %}
+{% if request.user.is_authenticated %}
+{% else %}
+<div class="card w-50" style="margin: auto; float: none;" style="text-align: center;" >
+    <h5 class="card-header">Login</h5>
+    <div class="card-body">
+      <h5 class="card-title">Welcome to the Forum</h5>
+      <p class="card-text">Are You Already a User click the login.</p>
+      <a href="{% url 'app1:log' %}" class="btn btn-primary">Login</a>
+    </div>
+  </div>
+{% endif %}
+<div class="card w-50" style="margin: auto; float: none;" style="text-align: center;"  >
+    <h5 class="card-header">Queries</h5>
+    <div class="card-body">
+      <h5 class="card-title">If You Need To Show the Queries</h5>
+      <p class="card-text">Kindly click the button.</p>
+      <a href="{% url 'app1:tav' %}" class="btn btn-primary">Queries</a>
+    </div>
+  </div>
